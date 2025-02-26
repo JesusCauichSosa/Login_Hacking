@@ -38,9 +38,9 @@ function handleLogin(event) {
 
     if (user) {
         localStorage.setItem('currentUser', JSON.stringify(user)); //el json.stringify convierte un objeto en un string
-        window.location.href = 'index.html';// redirecciona a la pagina index.html
+        window.location.href = 'home.html';// redirecciona a la pagina index.html
     } else {
-        alert('Invalid username or password.');
+        alert('Usuario o contraseña incorrectos.');
     }
 }
 
@@ -48,13 +48,13 @@ function handleMessageSubmit(event) {
     event.preventDefault(); //que hace esto r: previene que el formulario se envie
     const message = document.getElementById('message-input').value;
     if(message === '') {
-        alert('Please enter a message.');
+        alert('Por favor escribe un mensaje.');
         return;
     }
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
     if (!currentUser) {
-        alert('You must be logged in to send a message.');
+        alert('Debes iniciar sesión para enviar mensajes.');
         return;
     }
     
@@ -82,8 +82,8 @@ function handleRegistration(event) {
     const email = document.getElementById('email').value;
 
     saveUserData(username, password, email);
-    alert('Registration successful!');
-    window.location.href = 'login.html';
+    alert('Registro excitoso!');
+    window.location.href = 'index.html';
 }
 
 function clearAllMessages(event){
@@ -91,20 +91,20 @@ function clearAllMessages(event){
 
     const messages = getMessages();
     if(messages.length === 0){
-        alert('There are no messages to clear');
+        alert('No hay mensajes para limpiar');
         return;
     }
 
     localStorage.removeItem('messages');
     displayMessages();
-    alert('Messages have been cleared');
+    alert('Mesajes eliminados');
 }
 
 function clearMyMessages(event){
     event.preventDefault();
     const messages = getMessages();
     if(messages.length === 0){
-        alert('There are no messages to clear');
+        alert('No hay mensajes para limpiar');
         return;
     }
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -116,7 +116,7 @@ function clearMyMessages(event){
     // Mostrar los mensajes actualizados
     displayMessages();
 
-    alert('Your messages have been cleared');
+    alert('Mensajes eliminados');
 }
 
 function getMessages() {

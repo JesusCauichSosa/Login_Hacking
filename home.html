@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Inicio</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="message-section">
+        <h2>Enviar un Mensaje o Comentario</h2>
+        <form id="messageForm">
+            <textarea id="message-input" placeholder="Escribe tu mensaje aquí..."></textarea>
+            <button type="submit" id="send-message">Enviar</button>
+        </form>
+        <h3>Mensajes:</h3>
+        <div id="messages-display"></div>
+        <h3>Acciones:</h3>
+        <button id="clearAllMessagesButton">Borrar Mensajes</button>
+        <br><br>
+        <button id="clearMyMessagesButton">Borrar mis Mensajes</button>
+    </div>
+    <script src="js/storage.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

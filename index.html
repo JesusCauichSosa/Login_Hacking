@@ -1,26 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Page</title>
+    <title>Iniciar Sesión</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <div class="message-section">
-        <h2>Send a Message or Comment</h2>
-        <form id="messageForm">
-            <textarea id="message-input" placeholder="Type your message here..."></textarea>
-            <button type="submit" id="send-message">Send</button>
+    <div class="login-container">
+        <h2>Iniciar Sesión</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Nombre de Usuario:</label>
+                <input type="text" id="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit">Iniciar Sesión</button>
         </form>
-        <h3>Messages:</h3>
-        <div id="messages-display"></div>
-        <h3>Actions:</h3>
-        <button id="clearAllMessagesButton">Clear Messages</button> <!-- si no esta dentro de un form es click su type  -->
-        <br><br>
-        <button id="clearMyMessagesButton">Clear my Messages</button>
+        <p>¿No tienes una cuenta? <a href="register.html">Regístrate aquí</a></p>
     </div>
-    <script src="js/storage.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
