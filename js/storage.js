@@ -1,3 +1,7 @@
+let loginAttempts = 0;
+const maxAttempts = 5;
+const lockoutTime = 30000; // 30 segundos
+
 function saveUserData(username, password, email) {
     // Cifrar la contraseña antes de guardarla
     const encryptedPassword = CryptoJS.SHA256(password).toString();
@@ -19,6 +23,11 @@ function saveUserData(username, password, email) {
 }
 
 function loginUser(username, password) {
+    if (loginAttempts >= maxAttempts) {
+        alert('Demasiados intentos fallidos. Por favor, espera un momento antes de intentar nuevamente.');
+        return;
+    }
+
     const encryptedPassword = CryptoJS.SHA256(password).toString();
     const users = JSON.parse(localStorage.getItem('users')) || [];
 
@@ -28,7 +37,13 @@ function loginUser(username, password) {
         sessionStorage.setItem('currentUser', JSON.stringify({ username: user.username, email: user.email }));
         window.location.href = 'home.html';
     } else {
+        loginAttempts++;
         alert('Usuario o contraseña incorrectos.');
+        if (loginAttempts >= maxAttempts) {
+            setTimeout(() => {
+                loginAttempts = 0;
+            }, lockoutTime);
+        }
     }
 }
 

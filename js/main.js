@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const messageForm = document.getElementById('messageForm');
     const clearAllMessagesButton = document.getElementById('clearAllMessagesButton');
     const clearMyMessagesButton = document.getElementById('clearMyMessagesButton');
+
     if (loginForm) {
         loginForm.addEventListener('submit', function(event) {
             event.preventDefault();
@@ -46,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
     verificarSesion();
 });
 
-
 function verificarSesion() {
     const currentUser = getCurrentUser();
     
@@ -58,16 +58,6 @@ function verificarSesion() {
         window.location.href = "index.html";
     }
 }
-
-document.addEventListener('DOMContentLoaded', () => { 
-    const logoutButton = document.getElementById('logoutButton');
-
-    if (logoutButton) {
-        logoutButton.addEventListener('click', function() {
-            logoutUser();
-        });
-    }
-});
 
 function logoutUser() {
     sessionStorage.removeItem('currentUser');
@@ -98,7 +88,6 @@ function handleMessageSubmit(event) {
     displayMessages();
     event.target.reset();
 }
-
 
 function displayMessages() {
     const messages = getMessages();
@@ -139,7 +128,6 @@ function sanitizeInput(input) {
     });
 }
 
-
 function clearAllMessages(event){
     event.preventDefault();
 
@@ -151,7 +139,7 @@ function clearAllMessages(event){
 
     localStorage.removeItem('messages');
     displayMessages();
-    alert('Mesajes eliminados');
+    alert('Mensajes eliminados');
 }
 
 function clearMyMessages(event) {
