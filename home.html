@@ -19,8 +19,14 @@
         <button id="clearAllMessagesButton">Borrar Mensajes</button>
         <br><br>
         <button id="clearMyMessagesButton">Borrar mis Mensajes</button>
+        <br><br>
+        <button id="logoutButton">Cerrar Sesión</button> <!-- NUEVO BOTÓN -->
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script src="js/storage.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        verificarSesion(); // Verifica sesión solo en home.html
+    </script>
 </body>
 </html>
