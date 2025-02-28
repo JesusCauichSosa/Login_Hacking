@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (messageForm) {
         messageForm.addEventListener('submit', handleMessageSubmit);
-        displayMessages(); // Mostrar mensajes al cargar la página
+        displayMessages(); 
     }
 
     if (clearAllMessagesButton) {
@@ -50,7 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
 function verificarSesion() {
     const currentUser = getCurrentUser();
     
-    // Verificar si estamos en una página protegida (home.html)
     const isProtectedPage = window.location.pathname.includes('home.html');
 
     if (!currentUser && isProtectedPage) {
@@ -74,7 +73,7 @@ function handleMessageSubmit(event) {
         return;
     }
 
-    const currentUser = JSON.parse(sessionStorage.getItem('currentUser')); // Corregido a sessionStorage
+    const currentUser = JSON.parse(sessionStorage.getItem('currentUser')); 
 
     if (!currentUser) {
         alert('Debes iniciar sesión para enviar mensajes.');
@@ -93,7 +92,7 @@ function displayMessages() {
     const messages = getMessages();
     const messagesDisplay = document.getElementById('messages-display');
 
-    messagesDisplay.innerHTML = ''; // Limpiar antes de agregar nuevos mensajes
+    messagesDisplay.innerHTML = ''; 
 
     if (messages.length === 0) {
         messagesDisplay.textContent = 'No hay mensajes, escribe uno.';
@@ -104,7 +103,7 @@ function displayMessages() {
         const p = document.createElement('p');
         const strong = document.createElement('strong');
 
-        // Evitar XSS sanitizando la entrada
+
         strong.textContent = msg.user + ': ';
         p.appendChild(strong);
         p.appendChild(document.createTextNode(msg.text));
@@ -113,7 +112,7 @@ function displayMessages() {
     });
 }
 
-// Función para sanitizar entradas y prevenir XSS
+//para sanitizar entradas y prevenir XSS
 function sanitizeInput(input) {
     return input.replace(/[&<>"'\/]/g, function (char) {
         const charMap = {
@@ -154,12 +153,9 @@ function clearMyMessages(event) {
         alert('Debes iniciar sesión para eliminar tus mensajes.');
         return;
     }
-    // Filtrar los mensajes que no pertenecen al usuario actual
     const remainingMessages = messages.filter(msg => msg.user !== currentUser.username);
-    // Actualizar el localStorage con los mensajes restantes
     localStorage.setItem('messages', JSON.stringify(remainingMessages));
 
-    // Mostrar los mensajes actualizados
     displayMessages();
 
     alert('Mensajes eliminados');
@@ -168,3 +164,30 @@ function clearMyMessages(event) {
 function getMessages() {
     return JSON.parse(localStorage.getItem('messages')) || [];
 }
+
+//desde aqui es para bloquear el click derecho y las telcas
+document.addEventListener('contextmenu', function(event) {
+    event.preventDefault();
+});
+
+document.addEventListener('keydown', function(event) {
+    if (event.ctrlKey && (event.key === 'u' || event.key === 'U')) {
+        event.preventDefault();
+        alert("Acción bloqueada.");
+    }
+
+    if (event.ctrlKey && event.shiftKey && (event.key === 'i' || event.key === 'I')) {
+        event.preventDefault();
+        alert("Acción bloqueada.");
+    }
+
+    if (event.ctrlKey && event.shiftKey && (event.key === 'j' || event.key === 'J')) {
+        event.preventDefault();
+        alert("Acción bloqueada.");
+    }
+
+    if (event.key === 'F12') {
+        event.preventDefault();
+        alert("Acción bloqueada.");
+    }
+});

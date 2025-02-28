@@ -1,15 +1,14 @@
 let loginAttempts = 0;
 const maxAttempts = 5;
-const lockoutTime = 30000; // 30 segundos
+const lockoutTime = 30000; //30 segundos
 
 function saveUserData(username, password, email) {
-    // Cifrar la contraseña antes de guardarla
+    //cifrar antes antes de guardarla
     const encryptedPassword = CryptoJS.SHA256(password).toString();
 
     const userData = { username, password: encryptedPassword, email };
     const users = JSON.parse(localStorage.getItem('users')) || [];
-    
-    // Verificar si el usuario ya existe
+
     if (users.some(user => user.username === username)) {
         alert("El usuario ya existe.");
         return;

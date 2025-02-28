@@ -1,0 +1,29 @@
+# Mejoras de Seguridad Implementadas
+
+## 1️⃣ Protección de Credenciales y Sesiones
+- Se implementó cifrado de contraseñas con la librería CryptoJS antes de almacenarlas en `localStorage`.
+- Ahora la aplicación utiliza `sessionStorage` en lugar de `localStorage` para gestionar la sesión del usuario de manera más segura.
+- Se agregó una función de verificación de sesión para redirigir a los usuarios no autenticados de `home.html` a `index.html`.
+
+## 2️⃣ Protección contra Ataques de Fuerza Bruta en Login
+- Se estableció un límite de intentos de inicio de sesión.
+- Si el usuario falla 5 veces seguidas, debe esperar 30 segundos antes de intentarlo nuevamente.
+
+## 3️⃣ Validación de Acceso a Páginas Protegidas
+- Se incluyó una validación en `home.html` que revisa si el usuario tiene sesión activa.
+- Si alguien intenta acceder a `home.html` sin haber iniciado sesión, será redirigido automáticamente a `index.html`.
+- Se realizaron pruebas intentando acceder manualmente a `home.html` mediante la consola del navegador 
+(`window.location.href = 'home.html'`), confirmando que la aplicación redirige correctamente a los usuarios no autenticados.
+
+## 4️⃣ Bloqueo de Manipulación del Lado del Cliente
+- Se bloqueó el clic derecho para evitar el acceso rápido a herramientas de inspección.
+- Se deshabilitaron combinaciones de teclas peligrosas, como:
+- `F12` (Abrir herramientas de desarrollo).
+- `Ctrl + Shift + I` (Abrir inspección de elementos).
+- `Ctrl + Shift + J` (Abrir consola directamente).
+- `Ctrl + U` (Ver código fuente).
+
+## 5️⃣ Protección contra Inyección de Código y XSS
+- Se implementó una sanitización de entradas para evitar inyecciones de código malicioso en los mensajes.
+- Se reemplazó `innerHTML` por `textContent` en la función que muestra los mensajes de los usuarios.
+- Se realizaron pruebas enviando mensajes con scripts maliciosos verificando que ahora se muestran como texto sin ejecutarse.
