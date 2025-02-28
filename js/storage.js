@@ -1,4 +1,3 @@
-// Incluir CryptoJS (asegúrate de cargarlo en tu HTML antes de usar este código)
 function saveUserData(username, password, email) {
     // Cifrar la contraseña antes de guardarla
     const encryptedPassword = CryptoJS.SHA256(password).toString();

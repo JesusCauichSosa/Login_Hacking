@@ -2,8 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('loginForm');
     const registrationForm = document.getElementById('registrationForm');
     const logoutButton = document.getElementById('logoutButton');
-    const messageForm = document.getElementById('messageForm'); // Agregamos formulario de mensajes
-
+    const messageForm = document.getElementById('messageForm');
+    const clearAllMessagesButton = document.getElementById('clearAllMessagesButton');
+    const clearMyMessagesButton = document.getElementById('clearMyMessagesButton');
     if (loginForm) {
         loginForm.addEventListener('submit', function(event) {
             event.preventDefault();
@@ -32,6 +33,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (messageForm) {
         messageForm.addEventListener('submit', handleMessageSubmit);
         displayMessages(); // Mostrar mensajes al cargar la página
+    }
+
+    if (clearAllMessagesButton) {
+        clearAllMessagesButton.addEventListener('click', clearAllMessages);
+    }
+
+    if (clearMyMessagesButton) {
+        clearMyMessagesButton.addEventListener('click', clearMyMessages);
     }
 
     verificarSesion();
@@ -145,17 +154,21 @@ function clearAllMessages(event){
     alert('Mesajes eliminados');
 }
 
-function clearMyMessages(event){
+function clearMyMessages(event) {
     event.preventDefault();
     const messages = getMessages();
-    if(messages.length === 0){
+    if (messages.length === 0) {
         alert('No hay mensajes para limpiar');
         return;
     }
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-     // Filtrar los mensajes que no pertenecen al usuario actual
+    const currentUser = JSON.parse(sessionStorage.getItem('currentUser')); // Corregido a sessionStorage
+    if (!currentUser) {
+        alert('Debes iniciar sesión para eliminar tus mensajes.');
+        return;
+    }
+    // Filtrar los mensajes que no pertenecen al usuario actual
     const remainingMessages = messages.filter(msg => msg.user !== currentUser.username);
-       // Actualizar el localStorage con los mensajes restantes
+    // Actualizar el localStorage con los mensajes restantes
     localStorage.setItem('messages', JSON.stringify(remainingMessages));
 
     // Mostrar los mensajes actualizados
